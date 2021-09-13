@@ -1,0 +1,34 @@
+﻿.video-container {
+    display: inline-block;
+    padding-left: 1%;
+}
+
+.navbar {
+    color: darkgray;
+    padding-left: 15%;
+}
+
+header {
+    padding-left: 1%;
+}
+
+footer {
+    position: absolute;
+    bottom: auto;
+}
+
+aside {
+    height: 100%; /* Высота в полный размер. Этот параметр можно убрать, если вы хотите выставлять высоту автоматически */
+    width: 10%;
+    position: absolute; /* Фиксированная позиция сайд-бара. Так он будет оставаться на месте при скроллинге */
+    z-index: 1; /* Сайд-бар будет поверх остальных элементов */
+    top: 0; /* Сайдбар будет в самой верхней части страницы */
+    left: 0;
+    background-color: #111; /* Черный цвет фона (задан в виде кода) */
+    overflow-x: hidden; /* Отключаем горизонтальную прокрутку */
+    padding-top: 20px;
+}
+
+body {
+    padding-left: 11%;
+}
