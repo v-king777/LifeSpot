@@ -11,7 +11,6 @@ header {
     color: #123;
     font-size: large;
     margin-left: 1%;
-    margin-bottom: 1%;
 }
 
 footer {
@@ -19,13 +18,19 @@ footer {
     font-size: medium;
     line-height: 50%;
     margin-left: 1%;
+    margin-top: 10%;
+}
+
+.video-container {
+    display: inline-block;
+    border: 1px solid #123;
+    margin-left: 1%;
     margin-top: 1%;
 }
 
-.videoContainer {
-    display: inline-block;
-    margin-left: 1%;
-    margin-top: 1%;
+.video-description {
+    color: #123;
+    margin-left: 5%;
 }
 
 #sidebar {
