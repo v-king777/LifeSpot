@@ -1,7 +1,7 @@
 ﻿let age = prompt("Пожалуйста, введите ваш возраст");
 
 if (age >= 18) {
-    alert("Приветствуем на LifeSpot! " + new Date().toLocaleString());
+    alert("Добро пожаловать на LifeSpot! " + new Date().toLocaleString());
 }
 else {
     alert("Наши трансляции не предназначены для лиц моложе 18 лет.\nВы будете перенаправлены в гугл:)");
