@@ -1,57 +1,53 @@
-﻿.video-container {
+﻿body, header, footer {
+    background-color: palegoldenrod;
+}
+
+body {
+    margin: 0;
+    margin-left: 12%;
+}
+
+header {
+    color: #123;
+    font-size: large;
+    margin-left: 1%;
+    margin-bottom: 1%;
+}
+
+footer {
+    color: dimgray;
+    font-size: medium;
+    line-height: 50%;
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+.videoContainer {
     display: inline-block;
-    padding-left: 1%;
-    padding-top: 1%;
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+#sidebar {
+    background-color: #123;
+    font-size: large;
+    overflow-x: hidden;
+    height: 100%;
+    width: 10%;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 .navbar p {
     color: darkgray;
-    padding-left: 5%;
-    padding-right: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
     .navbar p:hover {
         color: aquamarine;
     }
-
-header {
-    color: black;
-    padding-left: 1%;
-    padding-top: 1%;
-}
-
-#header-index {
-    color: #112233;
-}
-
-footer {
-    font-size: medium;
-    color: dimgrey;
-    line-height: 66%;
-    padding-left: 1%;
-    padding-top: 5%;
-}
-
-#sidebar {
-    height: 100%;
-    width: 10%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #123;
-    overflow-x: hidden;
-    padding-top: 1%;
-    font-size: large;
-}
-
-body {
-    padding-left: 12%;
-}
-
-header, footer, body, .video-container {
-    background-color: palegoldenrod;
-}
 
 input:focus {
     background-color: lightcyan;
