@@ -5,47 +5,43 @@
     <title>LifeSpot</title>
     <link href="../Static/CSS/index.css" rel="stylesheet" type="text/css">
 </head>
-<header id="header-index">
-    <!--Заголовок страницы-->
-    <h1>LifeSpot - прямые трансляции с улиц</h1>
-    <!--Параграф-->
-    <p>Покажем, что происходит прямо сейчас</p>
-    <!--Строка поиска с кнопкой-->
-    <input type="text" size="50">
-    <button>Найти</button>
-</header>
 <body>
-    <div class="bordered">
-        <div class="video-container">
+    <!--Шапка страницы-->
+    <header>
+        <h1>LifeSpot - прямые трансляции с улиц</h1>
+        <p>Покажем, что происходит прямо сейчас</p>
+        <input type="text" size="50">
+    </header>
+    <!--Контент страницы-->
+    <div class="mainContent">
+        <div class="videoContainer">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/srlpC5tmhYs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <h3>Нью-Йорк, Брайант Парк</h3>
         </div>
-        <div class="video-container">
+        <div class="videoContainer">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/CUyy8rBnuzY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <h3>Лас-Вегас, никогда не спит</h3>
+            <h3>Лас-Вегас никогда не спит</h3>
         </div>
-        <div class="video-container">
+        <div class="videoContainer">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/wCcMcaiRbhM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <h3>Санкт-Петербург, Дворцовый мост</h3>
         </div>
-        <div class="video-container">
+        <div class="videoContainer">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/jbqT0fTj088" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <h3>Санкт-Петербург, крейсер Аврора</h3>
         </div>
     </div>
-    <div class="navbar">
-        <!--Сайд-бар страницы-->
-        <aside id="sidebar">
-            <div class="navbar">
-                <a href="/"><p>Все трансляции</p></a>
-                <a href="/"><p>О проекте</p></a>
-            </div>
-        </aside>
-    </div>
+    <!--Сайд-бар страницы-->
+    <aside id="sidebar">
+        <div class="navbar">
+            <a href="/"><p>Все трансляции</p></a>
+            <a href="/"><p>О проекте</p></a>
+        </div>
+    </aside>
+    <!--Подвал страницы-->
+    <footer>
+        <p>LifeSpot - все права защищены</p>
+        <p>Связаться с нами: contact@lifespot.ru</p>
+    </footer>
 </body>
-<!--Футер страницы находится под основной частью (body)-->
-<footer>
-    <p>LifeSpot - все права защищены</p>
-    <p>Связаться с нами: contact@lifespot.ru</p>
-</footer>
 </html>
