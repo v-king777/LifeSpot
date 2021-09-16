@@ -22,6 +22,7 @@ footer {
 }
 
 .video-container {
+    background-color: #fff;
     display: inline-block;
     border: 1px solid #123;
     margin-left: 1%;
