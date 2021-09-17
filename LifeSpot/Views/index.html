@@ -7,7 +7,13 @@
     <link href="../Static/CSS/index.css" rel="stylesheet">
     <script src="../Static/JS/index.js"></script>
     <script>
-        sessionHandler();
+        checkAge();
+        handleSession();
+        sessionLog();
+
+        const inputParseFunction = function () {
+            return document.getElementsByTagName('input')[0].value
+        }
     </script>
 </head>
 
@@ -16,7 +22,7 @@
         <h1>LifeSpot - прямые трансляции с улиц</h1>
         <p>Покажем, что происходит прямо сейчас!</p>
         <p>Начните вводить название видео:</p>
-        <input type="text" oninput="contentFilter(document.getElementsByTagName('input')[0].value)" size="50">
+        <input type="text" oninput="filterContent()" size="50">
     </header>
 
     <div class="main-content">
