@@ -1,8 +1,5 @@
-﻿body, header, footer {
+﻿body {
     background-color: palegoldenrod;
-}
-
-body {
     margin: 0;
     margin-left: 12%;
 }
@@ -18,7 +15,7 @@ footer {
     font-size: medium;
     line-height: 50%;
     margin-left: 1%;
-    margin-top: 10%;
+    margin-top: 50%;
 }
 
 .video-container {
@@ -57,4 +54,16 @@ footer {
 
 input:focus {
     background-color: lightcyan;
+}
+
+.review-button {
+    display: inline-block;
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+.review-text {
+    display: block;
+    margin-left: 1%;
+    margin-top: 1%;
 }

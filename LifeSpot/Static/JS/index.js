@@ -25,7 +25,6 @@ let sessionLog = function logSession() {
 }
 
 function filterContent() {
-
     let elements = document.getElementsByClassName('video-container');
 
     for (let i = 0; elements.length; i++) {
@@ -39,3 +38,5 @@ function filterContent() {
         }
     }
 }
+
+

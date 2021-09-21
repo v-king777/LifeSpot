@@ -11,8 +11,11 @@
         handleSession();
         sessionLog();
 
+        setTimeout(() =>
+            alert("Нравится LifeSpot?\nПодпишитесь на наш Instagram @lifespot999!"), 30000);
+
         const inputParseFunction = function () {
-            return document.getElementsByTagName('input')[0].value
+            return document.getElementsByTagName('input')[0].value;
         }
     </script>
 </head>
@@ -25,7 +28,7 @@
         <input type="text" oninput="filterContent()" size="50">
     </header>
 
-    <div class="main-content">
+    <main>
         <div class="video-container">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/srlpC5tmhYs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <h3 class="video-description">Нью-Йорк, Брайант Парк</h3>
@@ -42,8 +45,8 @@
             <iframe width="560" height="315" src="https://www.youtube.com/embed/jbqT0fTj088" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <h3 class="video-description">Санкт-Петербург, крейсер Аврора</h3>
         </div>
-    </div>
-
+    </main>
+    
     <!--SIDEBAR-->
     <!--FOOTER-->
 </body>
