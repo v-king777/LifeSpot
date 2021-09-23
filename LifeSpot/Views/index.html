@@ -7,16 +7,14 @@
     <link href="../Static/CSS/index.css" rel="stylesheet">
     <script src="../Static/JS/index.js"></script>
     <script>
-        checkAge();
-        handleSession();
-        sessionLog();
-
-        setTimeout(() =>
-            alert("Нравится LifeSpot?\nПодпишитесь на наш Instagram @lifespot999!"), 30000);
+        handleSession(logger, checker);
 
         const inputParseFunction = function () {
             return document.getElementsByTagName('input')[0].value;
         }
+
+        setTimeout(() =>
+            alert("Нравится LifeSpot?\nПодпишитесь на наш Instagram @lifespot999!"), 30000);
     </script>
 </head>
 
@@ -46,7 +44,7 @@
             <h3 class="video-description">Санкт-Петербург, крейсер Аврора</h3>
         </div>
     </main>
-    
+
     <!--SIDEBAR-->
     <!--FOOTER-->
 </body>
