@@ -42,10 +42,9 @@ function filterContent() {
     let elements = document.getElementsByClassName('video-container');
 
     for (let i = 0; elements.length; i++) {
-        let videoDescription = elements[i].getElementsByClassName('video-description')[0].innerText
-            .toLowerCase();
+        let videoDescription = elements[i].getElementsByClassName('video-description')[0].innerText;
 
-        if (!videoDescription.includes(inputParseFunction())) {
+        if (!videoDescription.toLowerCase().includes(inputParseFunction().toLowerCase())) {
             elements[i].style.display = 'none';
         }
         else {
