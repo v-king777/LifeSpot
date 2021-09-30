@@ -1,5 +1,8 @@
-﻿body {
+﻿body, header, footer {
     background-color: palegoldenrod;
+}
+
+body {
     margin: 0;
     margin-left: 12%;
 }
@@ -11,11 +14,13 @@ header {
 }
 
 footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     color: dimgray;
     font-size: medium;
     line-height: 50%;
-    margin-left: 1%;
-    margin-top: 50%;
+    padding-left: 1%;
 }
 
 .video-container {
