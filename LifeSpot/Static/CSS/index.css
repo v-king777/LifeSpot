@@ -14,13 +14,12 @@ header {
 }
 
 footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    width: 95%;
     color: dimgray;
     font-size: medium;
     line-height: 50%;
-    padding-left: 1%;
+    margin-left: 1%;
+    margin-top: 50%;
 }
 
 .video-container {
