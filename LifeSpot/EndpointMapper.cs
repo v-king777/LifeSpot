@@ -55,39 +55,74 @@ namespace LifeSpot
         }
 
         /// <summary>
+        /// Маппинг JPEG-файлов
+        /// </summary>
+        /// <param name="builder"></param>
+        public static void MapJpeg(this IEndpointRouteBuilder builder)
+        {
+            var jpegFiles = new[] { "london.jpg", "ny.jpg", "spb.jpg" };
+
+            foreach (var fileName in jpegFiles)
+            {
+                builder.MapGet($"/Static/Images/{fileName}", async context =>
+                {
+                    var jpegPath = Path.Combine(Directory.GetCurrentDirectory(), "Static", "Images", fileName);
+
+                    var jpeg = await File.ReadAllTextAsync(jpegPath);
+
+                    await context.Response.WriteAsync(jpeg);
+                });
+            }
+        }
+
+        /// <summary>
         /// Маппинг HTML-страниц
         /// </summary>
         /// <param name="builder"></param>
         public static void MapHtml(this IEndpointRouteBuilder builder)
         {
-            var htmlFiles = new[] { "index.html", "about.html", "testing.html" };
-
             var sideBarHtml = File.ReadAllText(Path.Combine(Directory
                 .GetCurrentDirectory(), "Views", "Shared", "sideBar.html"));
 
             var footerHtml = File.ReadAllText(Path.Combine(Directory
                 .GetCurrentDirectory(), "Views", "Shared", "footer.html"));
 
-            foreach (var fileName in htmlFiles)
+            var sliderHtml = File.ReadAllText(Path.Combine(Directory
+                .GetCurrentDirectory(), "Views", "Shared", "slider.html"));
+
+            builder.MapGet("/", async context =>
             {
-                var route = "/" + Path.GetFileNameWithoutExtension(fileName);
+                var htmlPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "index.html");
 
-                if (route == "/index")
-                {
-                    route = "/";
-                }
+                var html = new StringBuilder(await File.ReadAllTextAsync(htmlPath))
+                    .Replace("<!--SIDEBAR-->", sideBarHtml)
+                    .Replace("<!--FOOTER-->", footerHtml);
 
-                builder.MapGet(route, async context =>
-                {
-                    var htmlPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", fileName);
+                await context.Response.WriteAsync(html.ToString());
+            });
 
-                    var html = new StringBuilder(await File.ReadAllTextAsync(htmlPath))
-                        .Replace("<!--SIDEBAR-->", sideBarHtml)
-                        .Replace("<!--FOOTER-->", footerHtml);
+            builder.MapGet("/about", async context =>
+            {
+                var htmlPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "about.html");
 
-                    await context.Response.WriteAsync(html.ToString());
-                });
-            }
+                var html = new StringBuilder(await File.ReadAllTextAsync(htmlPath))
+                    .Replace("<!--SIDEBAR-->", sideBarHtml)
+                    .Replace("<!--FOOTER-->", footerHtml)
+                    .Replace("<!--SLIDER-->", sliderHtml);
+
+                await context.Response.WriteAsync(html.ToString());
+            });
+
+            builder.MapGet("/testing", async context =>
+            {
+                var htmlPath = Path.Combine(Directory.GetCurrentDirectory(), "Views", "testing.html");
+
+                var html = new StringBuilder(await File.ReadAllTextAsync(htmlPath))
+                    .Replace("<!--SIDEBAR-->", sideBarHtml)
+                    .Replace("<!--FOOTER-->", footerHtml);
+
+                await context.Response.WriteAsync(html.ToString());
+            });
         }
     }
 }
