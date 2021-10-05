@@ -13,82 +13,19 @@ namespace LifeSpot
     public static class EndpointMapper
     {
         /// <summary>
-        /// Маппинг CSS-файлов
-        /// </summary>
-        /// <param name="builder"></param>
-        public static void MapCss(this IEndpointRouteBuilder builder)
-        {
-            var cssFiles = new[] { "index.css" };
-
-            foreach (var fileName in cssFiles)
-            {
-                builder.MapGet($"/Static/CSS/{fileName}", async context =>
-                {
-                    var cssPath = Path.Combine(Directory.GetCurrentDirectory(), "Static", "CSS", fileName);
-
-                    var css = await File.ReadAllTextAsync(cssPath);
-
-                    await context.Response.WriteAsync(css);
-                });
-            }
-        }
-
-        /// <summary>
-        /// Маппинг JS-файлов
-        /// </summary>
-        /// <param name="builder"></param>
-        public static void MapJs(this IEndpointRouteBuilder builder)
-        {
-            var jsFiles = new[] { "index.js", "about.js", "testing.js" };
-
-            foreach (var fileName in jsFiles)
-            {
-                builder.MapGet($"/Static/JS/{fileName}", async context =>
-                {
-                    var jsPath = Path.Combine(Directory.GetCurrentDirectory(), "Static", "JS", fileName);
-
-                    var js = await File.ReadAllTextAsync(jsPath);
-
-                    await context.Response.WriteAsync(js);
-                });
-            }
-        }
-
-        /// <summary>
-        /// Маппинг JPEG-файлов
-        /// </summary>
-        /// <param name="builder"></param>
-        public static void MapJpeg(this IEndpointRouteBuilder builder)
-        {
-            var jpegFiles = new[] { "london.jpg", "ny.jpg", "spb.jpg" };
-
-            foreach (var fileName in jpegFiles)
-            {
-                builder.MapGet($"/Static/Images/{fileName}", async context =>
-                {
-                    var jpegPath = Path.Combine(Directory.GetCurrentDirectory(), "Static", "Images", fileName);
-
-                    var jpeg = await File.ReadAllTextAsync(jpegPath);
-
-                    await context.Response.WriteAsync(jpeg);
-                });
-            }
-        }
-
-        /// <summary>
         /// Маппинг HTML-страниц
         /// </summary>
         /// <param name="builder"></param>
         public static void MapHtml(this IEndpointRouteBuilder builder)
         {
-            var sideBarHtml = File.ReadAllText(Path.Combine(Directory
-                .GetCurrentDirectory(), "Views", "Shared", "sideBar.html"));
+            var sideBarHtml = File.ReadAllText(
+                Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "sideBar.html"));
 
-            var footerHtml = File.ReadAllText(Path.Combine(Directory
-                .GetCurrentDirectory(), "Views", "Shared", "footer.html"));
+            var footerHtml = File.ReadAllText(
+                Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "footer.html"));
 
-            var sliderHtml = File.ReadAllText(Path.Combine(Directory
-                .GetCurrentDirectory(), "Views", "Shared", "slider.html"));
+            var sliderHtml = File.ReadAllText(
+                Path.Combine(Directory.GetCurrentDirectory(), "Views", "Shared", "slider.html"));
 
             builder.MapGet("/", async context =>
             {
