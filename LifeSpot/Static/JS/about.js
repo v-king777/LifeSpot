@@ -71,3 +71,11 @@ function addLike(id) {
     // Обновим текст элемента
     element.innerText = array.join(' ')
 }
+
+// Инициализация слайдера
+document.addEventListener('DOMContentLoaded', function () {
+    new SimpleAdaptiveSlider('.slider', {
+        autoplay: false,
+        interval: 10000
+    });
+});
