@@ -12,7 +12,37 @@
     SWIPE_THRESHOLD = 20, TRANSITION_NONE = "transition-none";
 
 function SimpleAdaptiveSlider(t, i) {
-    for (var e in this._$root = document.querySelector(t), this._$wrapper = this._$root.querySelector(WRAPPER_SELECTOR), this._$items = this._$root.querySelector(ITEMS_SELECTOR), this._$itemList = this._$root.querySelectorAll(ITEM_SELECTOR), this._currentIndex = 0, this._minOrder = 0, this._maxOrder = 0, this._$itemWithMinOrder = null, this._$itemWithMaxOrder = null, this._minTranslate = 0, this._maxTranslate = 0, this._direction = "next", this._balancingItemsFlag = !1, this._transform = 0, this._hasSwipeState = !1, this._swipeStartPosX = 0, this._intervalId = null, this._config = { loop: !0, autoplay: !1, interval: 5e3, swipe: !0 }, i) this._config.hasOwnProperty(e) && (this._config[e] = i[e]); for (var s = 0, n = this._$itemList.length; s < n; s++)this._$itemList[s].dataset.order = s, this._$itemList[s].dataset.index = s, this._$itemList[s].dataset.translate = 0; if (this._config.loop) { var r = this._$itemList.length - 1, a = 100 * -this._$itemList.length; this._$itemList[r].dataset.order = -1, this._$itemList[r].dataset.translate = 100 * -this._$itemList.length; var o = "translateX(".concat(a, "%)"); this._$itemList[r].style.transform = o } this._addIndicators(), this._refreshExtremeValues(), this._setActiveClass(), this._addEventListener(), this._autoplay()
+    for (var e in this._$root = document.querySelector(t),
+        this._$wrapper = this._$root.querySelector(WRAPPER_SELECTOR),
+        this._$items = this._$root.querySelector(ITEMS_SELECTOR),
+        this._$itemList = this._$root.querySelectorAll(ITEM_SELECTOR),
+        this._currentIndex = 0, this._minOrder = 0,
+        this._maxOrder = 0,
+        this._$itemWithMinOrder = null,
+        this._$itemWithMaxOrder = null,
+        this._minTranslate = 0,
+        this._maxTranslate = 0,
+        this._direction = "next",
+        this._balancingItemsFlag = !1,
+        this._transform = 0,
+        this._hasSwipeState = !1,
+        this._swipeStartPosX = 0,
+        this._intervalId = null,
+        this._config = { loop: !0, autoplay: !1, interval: 5e3, swipe: !0 }, i)
+        this._config.hasOwnProperty(e) && (this._config[e] = i[e]);
+
+    for (var s = 0, n = this._$itemList.length; s < n; s++) {
+        this._$itemList[s].dataset.order = s, this._$itemList[s].dataset.index = s, this._$itemList[s].dataset.translate = 0;
+    }
+
+    if (this._config.loop) {
+        var r = this._$itemList.length - 1, a = 100 * -this._$itemList.length;
+        this._$itemList[r].dataset.order = -1, this._$itemList[r].dataset.translate = 100 * -this._$itemList.length;
+        var o = "translateX(".concat(a, "%)");
+        this._$itemList[r].style.transform = o
+    }
+
+    this._addIndicators(), this._refreshExtremeValues(), this._setActiveClass(), this._addEventListener(), this._autoplay()
 }
 
 SimpleAdaptiveSlider.prototype._setActiveClass = function () {
