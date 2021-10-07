@@ -190,14 +190,16 @@ SimpleAdaptiveSlider.prototype._setActiveClass = function () {
 
                 var n = i.left, r = this._$itemWithMinOrder;
                 t = this._minTranslate, r.getBoundingClientRect().right < n - e &&
-                    (r.dataset.order = this._minOrder + s, t += 100 * s, r.dataset.translate = t, r.style.transform = "translateX(".concat(t, "%)"), this._refreshExtremeValues())
+                    (r.dataset.order = this._minOrder + s, t += 100 * s, r.dataset.translate = t,
+                        r.style.transform = "translateX(".concat(t, "%)"), this._refreshExtremeValues())
 
             }
             else if ("prev" === this._direction) {
 
                 var a = i.right, o = this._$itemWithMaxOrder;
                 t = this._maxTranslate, o.getBoundingClientRect().left > a + e &&
-                    (o.dataset.order = this._maxOrder - s, t -= 100 * s, o.dataset.translate = t, o.style.transform = "translateX(".concat(t, "%)"), this._refreshExtremeValues())
+                    (o.dataset.order = this._maxOrder - s, t -= 100 * s, o.dataset.translate = t,
+                        o.style.transform = "translateX(".concat(t, "%)"), this._refreshExtremeValues())
             }
 
             requestAnimationFrame(this._balancingItems.bind(this))
@@ -205,17 +207,134 @@ SimpleAdaptiveSlider.prototype._setActiveClass = function () {
     },
 
     SimpleAdaptiveSlider.prototype._addEventListener = function () {
-        var t = this._$items; function i(t) { this._autoplay("stop"); var i = 0 === t.type.search("touch") ? t.touches[0] : t; this._swipeStartPosX = i.clientX, this._swipeStartPosY = i.clientY, this._hasSwipeState = !0, this._hasSwiping = !1 } function e(t) { if (this._hasSwipeState) { var i = 0 === t.type.search("touch") ? t.touches[0] : t, e = this._swipeStartPosX - i.clientX, s = this._swipeStartPosY - i.clientY; if (!this._hasSwiping) { if (Math.abs(s) > Math.abs(e)) return void (this._hasSwipeState = !1); this._hasSwiping = !0 } t.preventDefault(), this._config.loop || (this._currentIndex + 1 >= this._$itemList.length && e >= 0 && (e /= 4), this._currentIndex <= 0 && e <= 0 && (e /= 4)); var n = e / this._$wrapper.getBoundingClientRect().width * 100, r = this._transform - n; this._$items.classList.add(TRANSITION_NONE), this._$items.style.transform = "translateX(".concat(r, "%)") } } function s(t) { if (this._hasSwipeState) { var i = 0 === t.type.search("touch") ? t.changedTouches[0] : t, e = this._swipeStartPosX - i.clientX; this._config.loop || (this._currentIndex + 1 >= this._$itemList.length && e >= 0 && (e /= 4), this._currentIndex <= 0 && e <= 0 && (e /= 4)); var s = e / this._$wrapper.getBoundingClientRect().width * 100; this._$items.classList.remove(TRANSITION_NONE), s > SWIPE_THRESHOLD ? (this._direction = "next", this._move()) : s < -SWIPE_THRESHOLD ? (this._direction = "prev", this._move()) : (this._direction = "none", this._move()), this._hasSwipeState = !1, this._config.loop && this._autoplay() } } if (this._$root.addEventListener("click", function (t) { var i = t.target; if (this._autoplay("stop"), i.classList.contains("slider__control")) t.preventDefault(), this._direction = i.dataset.slide, this._move(); else if (i.dataset.slideTo) { t.preventDefault(); var e = parseInt(i.dataset.slideTo); this._moveTo(e) } this._config.loop && this._autoplay() }.bind(this)), this._config.loop && (t.addEventListener("transitionstart", function () { this._balancingItemsFlag = !0, window.requestAnimationFrame(this._balancingItems.bind(this)) }.bind(this)), t.addEventListener("transitionend", function () { this._balancingItemsFlag = !1 }.bind(this))), this._config.autoplay && (this._$root.addEventListener("mouseenter", function () { this._autoplay("stop") }.bind(this)), this._$root.addEventListener("mouseleave", function () { this._config.loop && this._autoplay() }.bind(this))), this._config.swipe) { var n = !1; try { var r = Object.defineProperty({}, "passive", { get: function () { n = !0 } }); window.addEventListener("testPassiveListener", null, r) } catch (t) { } this._$root.addEventListener("touchstart", i.bind(this), !!n && { passive: !1 }), this._$root.addEventListener("touchmove", e.bind(this), !!n && { passive: !1 }), this._$root.addEventListener("mousedown", i.bind(this)), this._$root.addEventListener("mousemove", e.bind(this)), document.addEventListener("touchend", s.bind(this)), document.addEventListener("mouseup", s.bind(this)) } this._$root.addEventListener("dragstart", function (t) { t.preventDefault() }.bind(this)), document.addEventListener("visibilitychange", function () { "hidden" === document.visibilityState ? this._autoplay("stop") : "visible" === document.visibilityState && this._config.loop && this._autoplay() }.bind(this))
+
+        var t = this._$items;
+
+        function i(t) {
+
+            this._autoplay("stop");
+
+            var i = 0 === t.type.search("touch") ? t.touches[0] : t; this._swipeStartPosX = i.clientX,
+                this._swipeStartPosY = i.clientY, this._hasSwipeState = !0, this._hasSwiping = !1
+        }
+
+        function e(t) {
+
+            if (this._hasSwipeState) {
+
+                var i = 0 === t.type.search("touch") ? t.touches[0] : t,
+                    e = this._swipeStartPosX - i.clientX,
+                    s = this._swipeStartPosY - i.clientY;
+
+                if (!this._hasSwiping) {
+
+                    if (Math.abs(s) > Math.abs(e))
+                        return void (this._hasSwipeState = !1);
+
+                    this._hasSwiping = !0;
+                }
+
+                t.preventDefault(), this._config.loop || (
+                    this._currentIndex + 1 >= this._$itemList.length && e >= 0 && (e /= 4),
+                    this._currentIndex <= 0 && e <= 0 && (e /= 4)
+                );
+
+                var n = e / this._$wrapper.getBoundingClientRect().width * 100, r = this._transform - n;
+
+                this._$items.classList.add(TRANSITION_NONE), this._$items.style.transform = "translateX(".concat(r, "%)");
+            }
+        }
+
+        function s(t) {
+
+            if (this._hasSwipeState) {
+
+                var i = 0 === t.type.search("touch") ? t.changedTouches[0] : t, e = this._swipeStartPosX - i.clientX;
+
+                this._config.loop || (this._currentIndex + 1 >= this._$itemList.length && e >= 0 && (e /= 4),
+                    this._currentIndex <= 0 && e <= 0 && (e /= 4));
+
+                var s = e / this._$wrapper.getBoundingClientRect().width * 100;
+
+                this._$items.classList.remove(TRANSITION_NONE),
+                    s > SWIPE_THRESHOLD ? (this._direction = "next", this._move()) :
+                        s < -SWIPE_THRESHOLD ? (this._direction = "prev", this._move()) :
+                            (this._direction = "none", this._move()),
+                    this._hasSwipeState = !1, this._config.loop && this._autoplay();
+            }
+        }
+
+        if (this._$root.addEventListener("click", function (t) {
+
+            var i = t.target;
+
+            if (this._autoplay("stop"), i.classList.contains("slider__control")) {
+
+                t.preventDefault(), this._direction = i.dataset.slide, this._move();
+            }
+            else if (i.dataset.slideTo) {
+
+                t.preventDefault();
+
+                var e = parseInt(i.dataset.slideTo); this._moveTo(e);
+            }
+
+            this._config.loop && this._autoplay();
+
+        }.bind(this)), this._config.loop && (t.addEventListener("transitionstart", function () {
+
+            this._balancingItemsFlag = !0, window.requestAnimationFrame(this._balancingItems.bind(this));
+
+        }.bind(this)), t.addEventListener("transitionend", function () {
+
+            this._balancingItemsFlag = !1;
+
+        }.bind(this))), this._config.autoplay && (this._$root.addEventListener("mouseenter", function () {
+
+            this._autoplay("stop");
+
+        }.bind(this)), this._$root.addEventListener("mouseleave", function () {
+
+            this._config.loop && this._autoplay();
+
+        }.bind(this))), this._config.swipe) {
+
+            var n = !1;
+            try {
+                var r = Object.defineProperty({}, "passive", { get: function () { n = !0 } });
+                window.addEventListener("testPassiveListener", null, r);
+            }
+            catch (t) { }
+
+            this._$root.addEventListener("touchstart", i.bind(this), !!n && { passive: !1 }),
+                this._$root.addEventListener("touchmove", e.bind(this), !!n && { passive: !1 }),
+                this._$root.addEventListener("mousedown", i.bind(this)),
+                this._$root.addEventListener("mousemove", e.bind(this)),
+                document.addEventListener("touchend", s.bind(this)),
+                document.addEventListener("mouseup", s.bind(this))
+
+        } this._$root.addEventListener("dragstart", function (t) {
+
+            t.preventDefault();
+
+        }.bind(this)), document.addEventListener("visibilitychange", function () {
+
+            "hidden" === document.visibilityState ? this._autoplay("stop") :
+                "visible" === document.visibilityState && this._config.loop && this._autoplay();
+        }.bind(this));
     },
 
     SimpleAdaptiveSlider.prototype.next = function () {
-        this._direction = "next", this._move()
+
+        this._direction = "next", this._move();
     },
 
     SimpleAdaptiveSlider.prototype.prev = function () {
-        this._direction = "prev", this._move()
+
+        this._direction = "prev", this._move();
     },
 
     SimpleAdaptiveSlider.prototype.autoplay = function (t) {
-        this._autoplay("stop")
+
+        this._autoplay("stop");
     };
