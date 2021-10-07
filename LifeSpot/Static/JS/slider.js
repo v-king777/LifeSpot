@@ -128,19 +128,80 @@ SimpleAdaptiveSlider.prototype._setActiveClass = function () {
     },
 
     SimpleAdaptiveSlider.prototype._autoplay = function (t) {
-        if (this._config.autoplay) return "stop" === t ? (clearInterval(this._intervalId), void (this._intervalId = null)) : void (null === this._intervalId && (this._intervalId = setInterval(function () { this._direction = "next", this._move() }.bind(this), this._config.interval)))
+
+        if (this._config.autoplay) {
+            return "stop" === t ? (clearInterval(this._intervalId), void (this._intervalId = null)) :
+                void (
+                    null === this._intervalId && (this._intervalId = setInterval(function () {
+                        this._direction = "next", this._move()
+                    }.bind(this), this._config.interval))
+                )
+        }
     },
 
     SimpleAdaptiveSlider.prototype._addIndicators = function () {
-        if (!this._$root.querySelector("." + INDICATOR_WRAPPER_CLASS)) { var t = document.createElement(INDICATOR_WRAPPER_ELEMENT); t.className = INDICATOR_WRAPPER_CLASS; for (var i = 0, e = this._$itemList.length; i < e; i++) { var s = document.createElement(INDICATOR_ITEM_ELEMENT); s.className = INDICATOR_ITEM_CLASS, s.dataset.slideTo = i, t.appendChild(s) } this._$root.appendChild(t) }
+
+        if (!this._$root.querySelector("." + INDICATOR_WRAPPER_CLASS)) {
+
+            var t = document.createElement(INDICATOR_WRAPPER_ELEMENT);
+            t.className = INDICATOR_WRAPPER_CLASS;
+
+            for (var i = 0, e = this._$itemList.length; i < e; i++) {
+
+                var s = document.createElement(INDICATOR_ITEM_ELEMENT);
+                s.className = INDICATOR_ITEM_CLASS, s.dataset.slideTo = i, t.appendChild(s)
+            }
+
+            this._$root.appendChild(t)
+        }
     },
 
     SimpleAdaptiveSlider.prototype._refreshExtremeValues = function () {
-        var t = this._$itemList; this._minOrder = parseInt(t[0].dataset.order), this._maxOrder = this._minOrder, this._$itemWithMinOrder = t[0], this._$itemWithMaxOrder = this._$itemWithMinOrder, this._minTranslate = parseInt(t[0].dataset.translate), this._maxTranslate = this._minTranslate; for (var i = 0, e = t.length; i < e; i++) { var s = t[i], n = parseInt(s.dataset.order); n < this._minOrder ? (this._minOrder = n, this._$itemWithMinOrder = s, this._minTranslate = parseInt(s.dataset.translate)) : n > this._maxOrder && (this._maxOrder = n, this._$itemWithMaxOrder = s, this._minTranslate = parseInt(s.dataset.translate)) }
+
+        var t = this._$itemList;
+
+        this._minOrder = parseInt(t[0].dataset.order),
+            this._maxOrder = this._minOrder,
+            this._$itemWithMinOrder = t[0],
+            this._$itemWithMaxOrder = this._$itemWithMinOrder,
+            this._minTranslate = parseInt(t[0].dataset.translate),
+            this._maxTranslate = this._minTranslate;
+
+        for (var i = 0, e = t.length; i < e; i++) {
+
+            var s = t[i], n = parseInt(s.dataset.order);
+
+            n < this._minOrder ? (this._minOrder = n,
+                this._$itemWithMinOrder = s,
+                this._minTranslate = parseInt(s.dataset.translate)) :
+                n > this._maxOrder && (this._maxOrder = n,
+                    this._$itemWithMaxOrder = s,
+                    this._minTranslate = parseInt(s.dataset.translate))
+        }
     },
 
     SimpleAdaptiveSlider.prototype._balancingItems = function () {
-        if (this._balancingItemsFlag) { var t, i = this._$wrapper.getBoundingClientRect(), e = i.width / 2, s = this._$itemList.length; if ("next" === this._direction) { var n = i.left, r = this._$itemWithMinOrder; t = this._minTranslate, r.getBoundingClientRect().right < n - e && (r.dataset.order = this._minOrder + s, t += 100 * s, r.dataset.translate = t, r.style.transform = "translateX(".concat(t, "%)"), this._refreshExtremeValues()) } else if ("prev" === this._direction) { var a = i.right, o = this._$itemWithMaxOrder; t = this._maxTranslate, o.getBoundingClientRect().left > a + e && (o.dataset.order = this._maxOrder - s, t -= 100 * s, o.dataset.translate = t, o.style.transform = "translateX(".concat(t, "%)"), this._refreshExtremeValues()) } requestAnimationFrame(this._balancingItems.bind(this)) }
+
+        if (this._balancingItemsFlag) {
+
+            var t, i = this._$wrapper.getBoundingClientRect(), e = i.width / 2, s = this._$itemList.length;
+
+            if ("next" === this._direction) {
+
+                var n = i.left, r = this._$itemWithMinOrder;
+                t = this._minTranslate, r.getBoundingClientRect().right < n - e &&
+                    (r.dataset.order = this._minOrder + s, t += 100 * s, r.dataset.translate = t, r.style.transform = "translateX(".concat(t, "%)"), this._refreshExtremeValues())
+
+            }
+            else if ("prev" === this._direction) {
+
+                var a = i.right, o = this._$itemWithMaxOrder;
+                t = this._maxTranslate, o.getBoundingClientRect().left > a + e &&
+                    (o.dataset.order = this._maxOrder - s, t -= 100 * s, o.dataset.translate = t, o.style.transform = "translateX(".concat(t, "%)"), this._refreshExtremeValues())
+            }
+
+            requestAnimationFrame(this._balancingItems.bind(this))
+        }
     },
 
     SimpleAdaptiveSlider.prototype._addEventListener = function () {
