@@ -9,9 +9,11 @@
     INDICATOR_ITEM_ELEMENT = "li",
     INDICATOR_ITEM_CLASS = "slider__indicator",
     INDICATOR_ITEM_CLASS_ACTIVE = "slider__indicator_active",
-    SWIPE_THRESHOLD = 20, TRANSITION_NONE = "transition-none";
+    SWIPE_THRESHOLD = 20,
+    TRANSITION_NONE = "transition-none";
 
 function SimpleAdaptiveSlider(t, i) {
+
     for (var e in this._$root = document.querySelector(t),
         this._$wrapper = this._$root.querySelector(WRAPPER_SELECTOR),
         this._$items = this._$root.querySelector(ITEMS_SELECTOR),
@@ -32,10 +34,12 @@ function SimpleAdaptiveSlider(t, i) {
         this._config.hasOwnProperty(e) && (this._config[e] = i[e]);
 
     for (var s = 0, n = this._$itemList.length; s < n; s++) {
+
         this._$itemList[s].dataset.order = s, this._$itemList[s].dataset.index = s, this._$itemList[s].dataset.translate = 0;
     }
 
     if (this._config.loop) {
+
         var r = this._$itemList.length - 1, a = 100 * -this._$itemList.length;
         this._$itemList[r].dataset.order = -1, this._$itemList[r].dataset.translate = 100 * -this._$itemList.length;
         var o = "translateX(".concat(a, "%)");
@@ -46,9 +50,11 @@ function SimpleAdaptiveSlider(t, i) {
 }
 
 SimpleAdaptiveSlider.prototype._setActiveClass = function () {
+
     var t, i, e, s;
 
     for (t = 0, i = this._$itemList.length; t < i; t++) {
+
         e = this._$itemList[t], s = parseInt(e.dataset.index),
             this._currentIndex === s ? e.classList.add(ITEM_CLASS_ACTIVE) :
                 e.classList.remove(ITEM_CLASS_ACTIVE);
@@ -57,7 +63,9 @@ SimpleAdaptiveSlider.prototype._setActiveClass = function () {
     var n = this._$root.querySelectorAll("." + INDICATOR_ITEM_CLASS);
 
     if (n.length) {
+
         for (t = 0, i = n.length; t < i; t++) {
+
             e = n[t], s = parseInt(e.dataset.slideTo),
                 this._currentIndex === s ? e.classList.add(INDICATOR_ITEM_CLASS_ACTIVE) :
                     e.classList.remove(INDICATOR_ITEM_CLASS_ACTIVE);
@@ -67,13 +75,17 @@ SimpleAdaptiveSlider.prototype._setActiveClass = function () {
     }
 
     if (r.length) {
+
         if (this._config.loop) {
+
             for (t = 0, i = r.length; t < i; t++) {
+
                 r[t].classList.add(CONTROL_CLASS_SHOW);
             }
         }
     }
     else {
+
         0 === this._currentIndex ? (r[0].classList.remove(CONTROL_CLASS_SHOW),
             r[1].classList.add(CONTROL_CLASS_SHOW)) : this._currentIndex === this._$itemList.length - 1 ?
             (r[0].classList.add(CONTROL_CLASS_SHOW), r[1].classList.remove(CONTROL_CLASS_SHOW)) :
@@ -82,11 +94,37 @@ SimpleAdaptiveSlider.prototype._setActiveClass = function () {
 },
 
     SimpleAdaptiveSlider.prototype._move = function () {
-        if ("none" === this._direction) return this._$items.classList.remove(TRANSITION_NONE), void (this._$items.style.transform = "translateX(".concat(this._transform, "%)")); if (!this._config.loop) { if (this._currentIndex + 1 >= this._$itemList.length && "next" === this._direction) return void this._autoplay("stop"); if (this._currentIndex <= 0 && "prev" === this._direction) return } var t = "next" === this._direction ? -100 : 100, i = this._transform + t; "next" === this._direction ? ++this._currentIndex > this._$itemList.length - 1 && (this._currentIndex -= this._$itemList.length) : --this._currentIndex < 0 && (this._currentIndex += this._$itemList.length), this._transform = i, this._$items.style.transform = "translateX(".concat(i, "%)"), this._setActiveClass()
+
+        if ("none" === this._direction) {
+
+            return this._$items.classList.remove(TRANSITION_NONE),
+                void (this._$items.style.transform = "translateX(".concat(this._transform, "%)"));
+        }
+
+        if (!this._config.loop) {
+
+            if (this._currentIndex + 1 >= this._$itemList.length && "next" === this._direction)
+                return void this._autoplay("stop");
+
+            if (this._currentIndex <= 0 && "prev" === this._direction)
+                return;
+        }
+
+        var t = "next" === this._direction ? -100 : 100, i = this._transform + t;
+
+        "next" === this._direction ? ++this._currentIndex > this._$itemList.length - 1 &&
+            (this._currentIndex -= this._$itemList.length) : --this._currentIndex < 0 &&
+        (this._currentIndex += this._$itemList.length), this._transform = i,
+            this._$items.style.transform = "translateX(".concat(i, "%)"), this._setActiveClass()
     },
 
     SimpleAdaptiveSlider.prototype._moveTo = function (t) {
-        var i = this._currentIndex; this._direction = t > i ? "next" : "prev"; for (var e = 0; e < Math.abs(t - i); e++)this._move()
+
+        var i = this._currentIndex;
+        this._direction = t > i ? "next" : "prev";
+
+        for (var e = 0; e < Math.abs(t - i); e++)
+            this._move()
     },
 
     SimpleAdaptiveSlider.prototype._autoplay = function (t) {
