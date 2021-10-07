@@ -46,7 +46,39 @@ function SimpleAdaptiveSlider(t, i) {
 }
 
 SimpleAdaptiveSlider.prototype._setActiveClass = function () {
-    var t, i, e, s; for (t = 0, i = this._$itemList.length; t < i; t++)e = this._$itemList[t], s = parseInt(e.dataset.index), this._currentIndex === s ? e.classList.add(ITEM_CLASS_ACTIVE) : e.classList.remove(ITEM_CLASS_ACTIVE); var n = this._$root.querySelectorAll("." + INDICATOR_ITEM_CLASS); if (n.length) for (t = 0, i = n.length; t < i; t++)e = n[t], s = parseInt(e.dataset.slideTo), this._currentIndex === s ? e.classList.add(INDICATOR_ITEM_CLASS_ACTIVE) : e.classList.remove(INDICATOR_ITEM_CLASS_ACTIVE); var r = this._$root.querySelectorAll(CONTROL_SELECTOR); if (r.length) if (this._config.loop) for (t = 0, i = r.length; t < i; t++)r[t].classList.add(CONTROL_CLASS_SHOW); else 0 === this._currentIndex ? (r[0].classList.remove(CONTROL_CLASS_SHOW), r[1].classList.add(CONTROL_CLASS_SHOW)) : this._currentIndex === this._$itemList.length - 1 ? (r[0].classList.add(CONTROL_CLASS_SHOW), r[1].classList.remove(CONTROL_CLASS_SHOW)) : (r[0].classList.add(CONTROL_CLASS_SHOW), r[1].classList.add(CONTROL_CLASS_SHOW))
+    var t, i, e, s;
+
+    for (t = 0, i = this._$itemList.length; t < i; t++) {
+        e = this._$itemList[t], s = parseInt(e.dataset.index),
+            this._currentIndex === s ? e.classList.add(ITEM_CLASS_ACTIVE) :
+                e.classList.remove(ITEM_CLASS_ACTIVE);
+    }
+
+    var n = this._$root.querySelectorAll("." + INDICATOR_ITEM_CLASS);
+
+    if (n.length) {
+        for (t = 0, i = n.length; t < i; t++) {
+            e = n[t], s = parseInt(e.dataset.slideTo),
+                this._currentIndex === s ? e.classList.add(INDICATOR_ITEM_CLASS_ACTIVE) :
+                    e.classList.remove(INDICATOR_ITEM_CLASS_ACTIVE);
+        }
+
+        var r = this._$root.querySelectorAll(CONTROL_SELECTOR);
+    }
+
+    if (r.length) {
+        if (this._config.loop) {
+            for (t = 0, i = r.length; t < i; t++) {
+                r[t].classList.add(CONTROL_CLASS_SHOW);
+            }
+        }
+    }
+    else {
+        0 === this._currentIndex ? (r[0].classList.remove(CONTROL_CLASS_SHOW),
+            r[1].classList.add(CONTROL_CLASS_SHOW)) : this._currentIndex === this._$itemList.length - 1 ?
+            (r[0].classList.add(CONTROL_CLASS_SHOW), r[1].classList.remove(CONTROL_CLASS_SHOW)) :
+            (r[0].classList.add(CONTROL_CLASS_SHOW), r[1].classList.add(CONTROL_CLASS_SHOW))
+    }
 },
 
     SimpleAdaptiveSlider.prototype._move = function () {
